@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+/* Constants */
+* {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+body {
+    background-color: #000;
+    font-family: 'Montserrat', sans-serif;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* Reusables */
+.contained {
+    margin: auto;
+    max-width: 935px;
+}
+
+.centrized {
+    display: flex;
+    padding: 0 10px;
+}
+
+
+/* Nav */
+.navbar {
+    height: 54px;
+    position: sticky;
+}
+
+.brand {
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.nav-content {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-item {
+    list-style: none;
+    min-width: 80px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-link {
+    text-decoration: none;
+}
+
+
+/* Home */
+.home {
+    padding-top: 50px;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.expense {
+    flex: 4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-content {
+    flex: 8;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-top: 30px;
+}
+
+.home-btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-btns .btn {
+    height: 45%;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <section class="centrized home">
+        <div class="expense">
+            <div class="this-month">
+                {{ month }} - MMK {{ expense }}
+            </div>
+            <div class="budget-percent">
+
+            </div>
+        </div>
+        <div class="home-content">
+            <div class="home-btns">
+                <div class="btn expense-btn">
+                    <i class=""></i>
+                    <a href="/expense">Expense</a>
+                </div>
+                <div class="btn income-btn">
+                    <i class=""></i>
+                    <a href="/income">Income</a>
+                </div>
+                <a href="/logout" style="display: none">
+                    <button class="btn">Sign out</button>
+                </a>
+            </div>
+            <div class="home-log">
+                transactions
+            </div>
+        </div>
+    </section>
+{% endblock %}

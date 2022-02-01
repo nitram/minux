@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+
+    <link href="/static/styles.css" rel="stylesheet">
+
+    <title>Minux</title>
+</head>
+<body>
+    {% if session.user_id %}
+        <section>
+            <nav class="contained navbar">
+                <div class="centrized nav-content">
+                    <div class="brand">Minux</div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/log">Log</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </section>
+    {% endif %}
+    <main class="contained">
+        {% block body %}{% endblock %}
+    </main>
+
+    {% block script %}{% endblock %}
+</body>
+</html>
