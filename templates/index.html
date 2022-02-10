@@ -2,24 +2,26 @@
 
 {% block body %}
     <section class="centrized home">
-        <div class="expense">
-            <div class="this-month">
-                {{ month }} - MMK {{ expense }}
-            </div>
-            <div class="budget-percent">
+        <div class="expense-main">
+            <div class="this-month">{{ month }} Expenses</div>
+            <div class="expense-value">MMK {{ expense }}</div> 
+        </div>
+        <div class="budget-percent">
 
-            </div>
+        </div>
         </div>
         <div class="home-content">
             <div class="home-btns">
-                <div class="btn expense-btn">
-                    <i class=""></i>
-                    <a href="/expense">Expense</a>
-                </div>
-                <div class="btn income-btn">
-                    <i class=""></i>
-                    <a href="/income">Income</a>
-                </div>
+                <a href="/expense" class="btn expense-btn">
+                    <i class="bi bi-dash"></i>
+                    <span>expense</span>
+                    <div class="tooltip">Add expense</div>
+                </a>
+                <a href="/income" class="btn income-btn">
+                    <i class="bi bi-plus"></i>
+                    <span>income</span>
+                    <div class="tooltip">Add income</div>
+                </a>
                 <a href="/logout" style="display: none">
                     <button class="btn">Sign out</button>
                 </a>
