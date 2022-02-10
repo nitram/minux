@@ -3,7 +3,7 @@
 {% block body %}
     <section class="centrized home">
         <div class="expense-main">
-            <div class="this-month">{{ month }} Expenses</div>
+            <h2 class="this-month">{{ month }} Expenses</h2>
             <div class="expense-value">MMK {{ expense }}</div> 
         </div>
         <div class="budget-percent">
@@ -12,22 +12,49 @@
         </div>
         <div class="home-content">
             <div class="home-btns">
-                <a href="/expense" class="btn expense-btn">
+                <a href="/expense" title="Add expense" class="btn expense-btn">
                     <i class="bi bi-dash"></i>
                     <span>expense</span>
-                    <div class="tooltip">Add expense</div>
                 </a>
-                <a href="/income" class="btn income-btn">
+                <a href="/income" title="Add income" class="btn income-btn">
                     <i class="bi bi-plus"></i>
                     <span>income</span>
-                    <div class="tooltip">Add income</div>
                 </a>
                 <a href="/logout" style="display: none">
                     <button class="btn">Sign out</button>
                 </a>
             </div>
             <div class="home-log">
-                transactions
+                <h3 class="title transaction-title">Lastest Transactions</h3>
+
+                {% for i in range(4) %}
+                    {% if i < transactions | length %}
+                        <a href="/edit-transaction" class="transaction">
+                            <div class="column">
+                                {% if transactions[i]['type'] == "expense" %}
+                                    <span class="type"><i class="bi bi-dash"></i></span>
+                                {% else %}
+                                    <span class="type"><i class="bi bi-plus"></i></span>
+                                {% endif %}
+                            </div>
+                            <div class="column">
+                                <span class="description">{{ transactions[i]['description'] | upper }}</span>
+                                <span class="category">{{ transactions[i]['name'] }}</span>
+                            </div>
+                            <div class="column">
+                                <span class="amount">{{ '{:,.2f}'.format(transactions[i]['amount']) }} MMK</span>
+                                <span class="date">{{ transactions[i]['transacted_on'] }}</span>
+                            </div>
+                        </a>
+
+                    {% else %}
+
+                    <div class="transaction"></div>
+
+                    {% endif %}
+                {% endfor %}
+
+                <a class="btn transaction-btn" href="/log">See all transactions</a>
             </div>
         </div>
     </section>

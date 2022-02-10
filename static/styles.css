@@ -22,6 +22,11 @@ button:hover {
     cursor: pointer;
 }
 
+h2, h3, h4, h5, h6 {
+    color: #dadada;
+    font-weight: 500;
+}
+
 a {
     text-decoration: none;
 }
@@ -36,12 +41,25 @@ input {
 
 .btn {
     border-radius: 8px;
-    background-color: #121212;
-    /* transition: all 0.1s; */
+    background-color: #eaeaea;
+    user-select: none;
+}
+
+.btn * {
+    user-select: none;
 }
 
 .btn:hover {
-    background-color: #242424;
+    background-color: #fff;
+}
+
+.btn:hover * {
+    color: #000;
+}
+
+::selection, ::-moz-selection {
+    color: #000;
+    background-color: #fff;
 }
 
 /* Reusables */
@@ -70,6 +88,7 @@ input {
     font-weight: 600;
     font-size: 20px;
     letter-spacing: 2px;
+    user-select: none;
 }
 
 .nav-content {
@@ -117,8 +136,6 @@ input {
 
 .this-month {
     font-size: 24px;
-    font-weight: 500;
-    color: #cacaca;
 }
 
 .expense-value {
@@ -157,12 +174,9 @@ input {
 .home-btns .btn i {
     font-size: 80px;
     font-weight: 700;
-    color: #cacaca;
+    color: #242424;
+    transition: all 0.2s ease-out;
 }
-
-.home-btns .btn:hover i {
-    color: #fff;
-} 
 
 .home-btns .btn span {
     position: absolute;
@@ -170,21 +184,104 @@ input {
     left: 20%;
     font-size: 120px;
     font-weight: 600;
-    color: #363636;
+    color: #cacaca;
     transition: all 0.2s ease-out;
 }
 
-.home-btns .btn:hover span {
-    transform: translateX(-8%)
+.home-btns .btn:hover i {
+    font-size: 74px;
 }
 
-.tooltip {
-    display: none;
+.home-btns .btn:hover span {
+    transform: translateX(-8%);
 }
 
 .home-log {
     width: 50%;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #242424;
+}
+
+.transaction-title {
+    flex: 1;
+    width: 100%;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #242424;
+}
+
+.transaction {
+    flex: 2;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.transaction:hover {
+    background-color: #121212;
+}
+
+.transaction .column {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
+.transaction .column:nth-child(1) {
+    flex: 1;
+    align-items: flex-start;
+    padding-left: 8px;
+}
+
+.column .type i {
+    font-size: 40px;
+}
+
+.transaction .column:nth-child(2) {
+    flex: 3;
+    border-bottom: 1px solid #242424;
+    align-items: flex-start;
+}
+
+.description, .category, .date {
+    color: #cacaca;
+}
+
+.description {
+    font-weight: 600;
+}
+
+.transaction .column:nth-child(3) {
+    flex: 4;
+    border-bottom: 1px solid #242424;
+    align-items: flex-end;
+    padding-right: 8px;
+}
+
+.transaction .column span:nth-child(2) {
+    font-size: 14px;
+}
+
+.amount {
+    color: #fff;
+    font-weight: 600;
+}
+
+.transaction-btn {
+    flex: 1;
+    margin-top: 16px;
+    width: 100%;
+    color: #242424;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+

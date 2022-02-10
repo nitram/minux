@@ -42,6 +42,18 @@ ACCOUNT = 150000
 def index():
     now = datetime.now()
 
+    latest_transactions = db.execute("SELECT transactions.type, transactions.amount, categories.name, \
+                                      transactions.description, transactions.transacted_on FROM transactions \
+                                      JOIN categories ON transactions.category_id = categories.category_id \
+                                      WHERE transactions.user_id IN (SELECT id FROM users WHERE id = ?) \
+                                      ORDER BY CAST(strftime('%Y', transacted_on) AS INT) DESC, \
+                                      CAST(strftime('%m', transacted_on) AS INT) DESC, \
+                                      CAST(strftime('%d', transacted_on) AS INT) DESC, \
+                                      transactions.transaction_id DESC LIMIT 4", session['user_id'])
+
+    for transaction in latest_transactions:
+        transaction['transacted_on'] = datetime.strptime(transaction['transacted_on'], ('%Y-%m-%d')).strftime('%d %b')
+
     expenses = db.execute("SELECT amount FROM transactions WHERE user_id IN (SELECT id FROM users WHERE id = ?) \
                            AND type = ? AND CAST(strftime('%Y', transacted_on) AS INT) = ? AND \
                            CAST(strftime('%m', transacted_on) AS INT) = ?", session['user_id'], "expense", now.year, now.month)
@@ -53,7 +65,25 @@ def index():
         month_expense += expense['amount']
 
     # Render the home (index) page
-    return render_template("index.html", month=month_name, expense=f'{month_expense:,.2f}')
+    return render_template("index.html", month=month_name, expense=f'{month_expense:,.2f}', transactions=latest_transactions)
+
+
+@app.route("/log")
+@login_required
+def log():
+    return render_template("log.html")
+
+
+@app.route("/profile")
+@login_required
+def profile():
+    return render_template("profile.html")
+
+
+@app.route("/edit-transaction")
+@login_required
+def edit_transaction():
+    return render_template("edit-transaction.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -194,7 +224,7 @@ def income():
         category = request.form.get("category")
         category_id = -1
         description = request.form.get("description")
-        transacted_on = request.form.get("spent_on")
+        transacted_on = request.form.get("transacted_on")
 
         if not amount:
             return apology(f"Must provide {type.capitalize()} amount", 400)
