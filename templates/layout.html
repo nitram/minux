@@ -21,9 +21,9 @@
                         <li class="nav-item">
                             <a id="profile-menu" style="cursor: pointer">
                                 {{ session['user_pic'] | safe }}
-                                <div class="profile-border" style="display: none"></div>
+                                <div class="profile-border d-none"></div>
                             </a>
-                            <div class="dropmenu" style="display: none">
+                            <div class="dropmenu d-none">
                                 <a href="/profile" class="dropitem"><div class="droparrow"></div><i class="bi bi-person"></i>Profile</a>
                                 <a href="/settings" class="dropitem"><i class="bi bi-gear-wide"></i>Settings</a>
                                 <hr>
@@ -39,37 +39,39 @@
         {% block body %}{% endblock %}
     </main>
 
-    <script type="text/javascript">
-        let dropDisplay = document.querySelector('.dropmenu');
-        let profileBorder = document.querySelector('.profile-border');
+    {% if session.user_id %}
+        <script type="text/javascript">
+            let dropDisplay = document.querySelector('.dropmenu');
+            let profileBorder = document.querySelector('.profile-border');
 
-        function toggleMenu() {
-            if (dropDisplay.style.display == "none") {
-                dropDisplay.style.display = "flex";
-                profileBorder.style.display = "block";
-            }
-            else {
-                hideMenu();
-            }
-        }
-
-        function hideMenu() {
-            if (dropDisplay.style.display != "none") {
-                dropDisplay.style.display = "none";
-                profileBorder.style.display = "none";
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            let profileMenu = document.querySelector('#profile-menu')
-            profileMenu.onclick = toggleMenu;
-            document.addEventListener('click', e => {
-                if (!profileMenu.contains(e.target)) {
+            function toggleMenu() {
+                if (dropDisplay.classList.contains('d-none')) {
+                    dropDisplay.classList.remove('d-none');
+                    profileBorder.classList.remove('d-none');
+                }
+                else {
                     hideMenu();
                 }
+            }
+
+            function hideMenu() {
+                if (!dropDisplay.classList.contains('d-none')) {
+                    dropDisplay.classList.add('d-none');
+                    profileBorder.classList.add('d-none');
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                let profileMenu = document.querySelector('#profile-menu')
+                profileMenu.onclick = toggleMenu;
+                document.addEventListener('click', e => {
+                    if (!profileMenu.contains(e.target)) {
+                        hideMenu();
+                    }
+                });
             });
-        });
-    </script>
+        </script>
+    {% endif %}
     {% block script %}{% endblock %}
 </body>
 </html>

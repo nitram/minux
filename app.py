@@ -95,19 +95,19 @@ def login():
     session.clear()
 
     if request.method == "POST":
-        username = request.form.get("username")
+        email = request.form.get("email")
         password = request.form.get("password")
 
         # Ensure username was submitted
-        if not username:
-            return apology("Must provide password", 403)
+        if not email:
+            return apology("Must provide email", 403)
 
         # Ensure password was submitted
         if not password:
             return apology("Must provide password", 403)
 
         # Query database for username
-        user = db.execute("SELECT * FROM users WHERE username = ?", username)
+        user = db.execute("SELECT * FROM users WHERE email = ?", email)
 
         if len(user) != 1 or not check_password_hash(user[0]['hash'], password):
             return apology("Invalid credentials", 403)
@@ -140,39 +140,34 @@ def register():
 
         firstname = request.form.get("firstname")
         lastname = request.form.get("lastname")
-        username = request.form.get("username")
+        email = request.form.get("email")
         password = request.form.get("password")
-        confirm_password = request.form.get("confirm_password")
 
         # Ensure all required data was submitted
         if not firstname:
             return apology("Must provide first name", 400)
 
-        if not username:
-            return apology("Must provide username", 400)
-
-        if not password or not confirm_password:
-            return apology("Must provide both passwords", 400)
-
-        if password != confirm_password:
-            return apology("Passwords not same", 400)
+        if not email:
+            return apology("Must provide email", 400)
 
         # Username already exists
-        username_exists = db.execute("SELECT id FROM users WHERE username = ?", username)
-        if username_exists:
+        email_exists = db.execute("SELECT id FROM users WHERE email = ?", email)
+        if email_exists:
             return apology("Username already exists", 400)
 
-        response = requests.get(f"https://avatars.dicebear.com/api/adventurer-neutral/{username}.svg")
+        # TODO
+        # - Clean up the two variables with a function
+        response = requests.get(f"https://avatars.dicebear.com/api/adventurer-neutral/{firstname.lower().replace(' ', '')}-{lastname.lower().replace(' ', '')}.svg")
         svg = response.content
 
         # Generate a password hash to store
         pw_hash = generate_password_hash(password)
 
         # Insert user into database
-        db.execute("INSERT INTO users (firstname, lastname, username, hash, pic) VALUES (?, ?, ?, ?, ?)", firstname, lastname, username, pw_hash, svg)
+        db.execute("INSERT INTO users (firstname, lastname, hash, email, pic) VALUES (?, ?, ?, ?, ?)", firstname, lastname, pw_hash, email, svg)
 
         # Remember which user has logged in
-        user = db.execute("SELECT id, pic FROM users WHERE username = ?", username)
+        user = db.execute("SELECT id, pic FROM users WHERE email = ?", email)
         session['user_id'] = user[0]['id']
         session['user_pic'] = user[0]['pic'].decode("utf-8")
 

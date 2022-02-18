@@ -1,8 +1,5 @@
 function validCheck() {
-    console.log("validCheck run")
-    let inputs = document.querySelectorAll('input');
-
-    if (!isEmpty(inputs)) {
+    if (!isEmpty()) {
         document.querySelector('.valid-btn').disabled = false;
     }
     else {
@@ -10,7 +7,10 @@ function validCheck() {
     }
 }
 
-function isEmpty(inputs) {
+
+function isEmpty() {
+    let inputs = document.querySelectorAll('input');
+
     for (let i = 0; i < inputs.length; i++) {
         if (inputs[i].value == null || inputs[i].value == '') {
             return true;
@@ -21,7 +21,9 @@ function isEmpty(inputs) {
 
 document.addEventListener('DOMContentLoaded', function() {
     let inputs = document.querySelectorAll('input');
+
     for (let i = 0; i < inputs.length; i++) {
-        inputs[i].onkeyup = validCheck
+        inputs[i].onkeyup = validCheck;
     }
 });
+

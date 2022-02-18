@@ -3,19 +3,20 @@
 {% block body %}
     <section class="centrized full-height login">
         <h1 class="login-title">Log into Minux</h1>
+
         <form action="/login" method="post" class="login-form">
             <div class="form-group">
-                <label for="username" style="display: none;">USERNAME</label>
+                <label for="email" style="display: none;">EMAIL</label>
                 <div class="form-control">
-                    <input autocomplete="off" autofocus id="username" name="username" placeholder="Username" type="text">
+                    <input id="email" name="email" placeholder="Email" type="email">
                 </div>
-            </div>
-            <div class="form-group">
+
                 <label for="password" style="display: none;">PASSWORD</label>
                 <div class="form-control">
                     <input id="password" name="password" placeholder="Password" type="password">
                 </div>
             </div>
+
             <button class="btn valid-btn" type="submit" disabled>Log in</button>
         </form>
 
@@ -32,5 +33,5 @@
 {% endblock %}
 
 {% block script %}
-    <script type="text/javascript" src="/static/buttons.js"></script>
+    <script type="text/javascript" src="/static/login.js"></script>
 {% endblock %}

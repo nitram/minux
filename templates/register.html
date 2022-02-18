@@ -1,22 +1,47 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <form action="/signup" method="post">
-        <div class="form-group">
-            <input class="form-control" autocomplete="off" autofocus name="firstname" placeholder="First Name" type="text">
-        </div>
-        <div>
-            <input class="form-control" autocomplete="off" name="lastname" placeholder="Last Name" type="text">
-        </div>
-        <div>
-            <input class="form-control" autocomplete="off" name="username" placeholder="Username" type="text">
-        </div>
-        <div class="form-group">
-            <input class="form-control" name="password" placeholder="Password" type="password">
-        </div>
-        <div>
-            <input class="form-control" name="confirm_password" placeholder="Confirm Password" type="password">
-        </div>
-        <button class="btn" type="submit">Sign up</button>
-    </form>
+    <section class="centrized full-height login">
+        <h1 class="login-title">Create Your Account</h1>
+
+        <form class="signup-form" action="/signup" method="post">
+            <div class="form-area">
+                <div class="form-group">
+                    <label for="firstname" style="display: none;">FIRST NAME</label>
+                    <div class="form-control">
+                        <input id="firstname" name="firstname" placeholder="First Name" type="text">
+                    </div>
+                    
+                    <label for="lastname" style="display: none;">LAST NAME</label>
+                    <div class="form-control">
+                        <input id="lastname" name="lastname" placeholder="Last Name" type="text">
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="email" style="display: none;">EMAIL</label>
+                    <div class="form-control">
+                        <input tabindex="-1" id="email" name="email" placeholder="Email" type="email">
+                    </div>
+    
+                    <label for="password" style="display: none;">Password</label>
+                    <div class="form-control">
+                        <input name="password" tabindex="-1" id="password" placeholder="Password" type="password">
+                    </div>
+                </div>
+            </div>
+            <button class="valid-btn next-btn btnTrans" type="button" disabled><i class="bi bi-arrow-right"></i></button>
+            <button class="btn valid-btn d-none" type="submit" disabled>Sign up</button>
+            <button class="back-btn hide" type="button">Go back</button>
+        </form>
+
+        <a href="/login" class="extra-btn login-signup" type="submit">
+            Log in
+            <span class="btn-border"></span>
+        </a>
+    </section>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="/static/register.js"></script>
 {% endblock %}

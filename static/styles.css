@@ -44,6 +44,7 @@ hr {
     width: 100%;
     border-radius: 4px;
     background-color: #eaeaea;
+    transition: all .1s ease-in-out;
 }
 
 .btn, .btn * {
@@ -95,10 +96,56 @@ hr {
     transform: translateX(0%);
 }
 
+.valid-btn {
+    padding: 12px;
+    margin: 12px 0;
+}
+
+.next-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid #fff;
+    padding: 0px;
+}
+
+.btnTrans {
+    transition: all .4s ease-out;
+}
+
+.next-btn i {
+    font-size: 20px;
+    transition: all .4s ease-out;
+}
+
+.next-btn:focus {
+    outline: 0;
+}
+
+.next-btn:hover, .next-btn:focus {
+    background-color: #fff;
+}
+
+.next-btn:hover i, .next-btn:focus i {
+    color: #000;
+}
+
+.next-btn:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+    border: 1px solid #363636;
+    background-color: #363636;
+}
+
+.next-btn:disabled i {
+    color: #6b6b6b;
+}
+
 .form-group {
     display: flex;
     flex-direction: column;
-    margin-bottom: 24px;
+    align-items: center;
     min-width: 320px;
 }
 
@@ -106,6 +153,7 @@ hr {
     width: 100%;
     border-radius: 4px;
     padding-top: 12px;
+    margin-bottom: 24px;
 }
 
 .form-control * {
@@ -157,25 +205,6 @@ label {
     background-color: #fff;
 }
 
-/* Reusables */
-.contained {
-    margin: auto;
-    max-width: 935px;
-}
-
-.centrized {
-    display: flex;
-    padding: 0 10px;
-}
-
-.no-height {
-    max-height: 0px;
-}
-
-.full-height {
-    min-height: 100vh;
-}
-
 
 /* Login & Register */
 .login {
@@ -185,13 +214,15 @@ label {
 }
 
 .login-title {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 500;
     margin-bottom: 60px;
 }
 
-.login-form {
-    height: 100;
+.login-form, .signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .login-signup {
@@ -200,13 +231,41 @@ label {
     right: 4%;
 }
 
-.valid-btn {
-    padding: 12px;
-    margin-top: 12px;
-}
-
 .recover {
     margin-top: 40px;
+}
+
+.form-area {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 320px;
+    overflow: hidden;
+}
+
+.form-area .form-group {
+    transition: all .4s ease-in-out;
+}
+
+.form-area .form-group:nth-child(2) {
+    position: absolute;
+    transform: translateX(100%);
+}
+
+.back-btn {
+    background: transparent;
+    font-size: 12px;
+    color: #cacaca;
+    margin: 12px 0;
+}
+
+.back-btn:focus {
+    outline: 0;
+}
+
+.back-btn:hover, .back-btn:focus {
+    color: #fff;
 }
 
 
@@ -274,6 +333,7 @@ label {
     position: absolute;
     top: 100%;
     right: 0;
+    display: flex;
     flex-direction: column;
     border: 1px solid #242424;
     transition: all 0.1s ease-out;
@@ -479,3 +539,29 @@ label {
 }
 
 
+/* Reusables */
+.contained {
+    margin: auto;
+    max-width: 935px;
+}
+
+.centrized {
+    display: flex;
+    padding: 0 10px;
+}
+
+.d-none {
+    display: none;
+}
+
+.hide {
+    visibility: hidden;
+}
+
+.no-height {
+    max-height: 0px;
+}
+
+.full-height {
+    min-height: 100vh;
+}
