@@ -39,8 +39,14 @@ input {
     font-size: 24px;
 }
 
+hr {
+    height: 1px;
+    background-color: #242424;
+    border: none;
+}
+
 .btn {
-    border-radius: 8px;
+    border-radius: 4px;
     background-color: #eaeaea;
     user-select: none;
 }
@@ -73,6 +79,9 @@ input {
     padding: 0 10px;
 }
 
+.no-height {
+    max-height: 0px;
+}
 
 /* Nav */
 .nav-section {
@@ -85,10 +94,11 @@ input {
 }
 
 .brand {
-    font-weight: 600;
-    font-size: 20px;
-    letter-spacing: 2px;
-    user-select: none;
+    height: 100%;
+}
+
+.brand img {
+    height: 100%;
 }
 
 .nav-content {
@@ -112,9 +122,72 @@ input {
     align-items: center;
 }
 
-.nav-link {
-    text-decoration: none;
+#profile-menu {
+    position: relative;
+    width: 24px;
+    height: 24px;
 }
+
+#profile-menu svg {
+    border-radius: 50%;
+}
+
+.profile-border {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 28px;
+    height: 28px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+}
+
+.dropmenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    flex-direction: column;
+    border: 1px solid #242424;
+    transition: all 0.1s ease-out;
+}
+
+.dropitem {
+    min-width: 200px;
+    padding: 12px;
+    font-size: 14px;
+    background-color: #000;
+}
+
+.dropitem:hover {
+    background-color: #121212;
+}
+
+.droparrow {
+    content: '';
+    position: absolute;
+    top: -7px;
+    right: 19%;
+    width: 12px;
+    height: 12px;
+    transform: rotate(45deg);
+    background-color: #000;
+    border-top: 1px solid #242424;
+    border-left: 1px solid #242424;
+    z-index: 999;
+}
+
+.dropitem:nth-child(1):hover .droparrow {
+    background-color: #121212;
+}
+
+.dropitem i {
+    font-size: 16px;
+    padding-right: 12px;
+}
+
+
+/* Login & Register */
 
 
 /* Home */
@@ -276,7 +349,7 @@ input {
 .transaction-btn {
     flex: 1;
     margin-top: 16px;
-    width: 100%;
+    width: 80%;
     color: #242424;
     font-weight: 500;
     display: flex;

@@ -1,4 +1,5 @@
 import os
+import requests
 
 from cs50 import SQL
 from flask import Flask, redirect, render_template, request, session
@@ -106,13 +107,14 @@ def login():
             return apology("Must provide password", 403)
 
         # Query database for username
-        users = db.execute("SELECT * FROM users WHERE username = ?", username)
+        user = db.execute("SELECT * FROM users WHERE username = ?", username)
 
-        if len(users) != 1 or not check_password_hash(users[0]['hash'], password):
+        if len(user) != 1 or not check_password_hash(user[0]['hash'], password):
             return apology("Invalid credentials", 403)
 
         # Remember which user has logged in
-        session['user_id'] = users[0]['id']
+        session['user_id'] = user[0]['id']
+        session['user_pic'] = user[0]['pic'].decode("utf-8")
 
         # Redirect user to home page
         return redirect("/")
@@ -160,15 +162,19 @@ def register():
         if username_exists:
             return apology("Username already exists", 400)
 
+        response = requests.get(f"https://avatars.dicebear.com/api/adventurer-neutral/{username}.svg")
+        svg = response.content
+
         # Generate a password hash to store
         pw_hash = generate_password_hash(password)
 
         # Insert user into database
-        db.execute("INSERT INTO users (firstname, lastname, username, hash) VALUES (?, ?, ?, ?)", firstname, lastname, username, pw_hash)
+        db.execute("INSERT INTO users (firstname, lastname, username, hash, pic) VALUES (?, ?, ?, ?, ?)", firstname, lastname, username, pw_hash, svg)
 
         # Remember which user has logged in
-        user = db.execute("SELECT id FROM users WHERE username = ?", username)
+        user = db.execute("SELECT id, pic FROM users WHERE username = ?", username)
         session['user_id'] = user[0]['id']
+        session['user_pic'] = user[0]['pic'].decode("utf-8")
 
         # Redirect user to home page
         return redirect("/")
@@ -244,3 +250,9 @@ def income():
 
     else:
         return render_template("income.html", categories=categories)
+
+
+@app.route("/test")
+def test():
+    response = requests.get("https://avatars.dicebear.com/api/initials/martin.svg")
+    return render_template("test.html", profile_pic=response.content.decode("utf-8"))
