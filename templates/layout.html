@@ -61,7 +61,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            profileMenu = document.querySelector('#profile-menu')
+            let profileMenu = document.querySelector('#profile-menu')
             profileMenu.onclick = toggleMenu;
             document.addEventListener('click', e => {
                 if (!profileMenu.contains(e.target)) {

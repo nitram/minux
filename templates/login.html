@@ -1,21 +1,36 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <section class="centrized login">
-        <form action="/login" method="post">
+    <section class="centrized full-height login">
+        <h1 class="login-title">Log into Minux</h1>
+        <form action="/login" method="post" class="login-form">
             <div class="form-group">
-                <label for="username" style="display: none">Username</label>
-                <input class="form-control" autocomplete="off" autofocus id="username" name="username" placeholder="Username" type="text">
+                <label for="username" style="display: none;">USERNAME</label>
+                <div class="form-control">
+                    <input autocomplete="off" autofocus id="username" name="username" placeholder="Username" type="text">
+                </div>
             </div>
-            <div>
-                <label for="password" style="display: none">Password</label>
-                <input class="form-control" id="password" name="password" placeholder="Password" type="password">
+            <div class="form-group">
+                <label for="password" style="display: none;">PASSWORD</label>
+                <div class="form-control">
+                    <input id="password" name="password" placeholder="Password" type="password">
+                </div>
             </div>
-            <button class="btn" type="submit">Sign in</button>
+            <button class="btn valid-btn" type="submit" disabled>Log in</button>
         </form>
+
+        <a href="/recover-password" class="extra-btn recover" type="submit">
+            Forgot password?
+            <span class="btn-border"></span>
+        </a>
     
-        <form action="/signup" method="get">
-            <button class="btn" type="submit">Sign up</button>
-        </form>
+        <a href="/signup" class="extra-btn login-signup" type="submit">
+            Create account
+            <span class="btn-border"></span>
+        </a>
     </section>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="/static/buttons.js"></script>
 {% endblock %}

@@ -14,7 +14,6 @@ body {
 }
 
 button {
-    background-color: transparent;
     border: none;
 }
 
@@ -31,10 +30,6 @@ a {
     text-decoration: none;
 }
 
-input {
-    color: #000;
-}
-
 .bi {
     font-size: 24px;
 }
@@ -46,12 +41,15 @@ hr {
 }
 
 .btn {
+    width: 100%;
     border-radius: 4px;
     background-color: #eaeaea;
-    user-select: none;
 }
 
-.btn * {
+.btn, .btn * {
+    font-size: 14px;
+    font-weight: 500;
+    color: #242424;
     user-select: none;
 }
 
@@ -61,6 +59,97 @@ hr {
 
 .btn:hover * {
     color: #000;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+    background-color: #363636;
+    color: #6b6b6b;
+}
+
+.extra-btn {
+    font-size: 14px;
+    font-weight: 500;
+    color: #eaeaea;
+    overflow: hidden;
+}
+
+.extra-btn:hover {
+    color: #fff;
+}
+
+.btn-border {
+    display: block;
+    width: 100%;
+    transform: translateX(-100%);
+    height: 1px;
+    margin-top: 4px;
+    background-color: #fff;
+    transition: all .4s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.68, 0.06);
+}
+
+.extra-btn:hover .btn-border {
+    transition-timing-function: cubic-bezier(.32,.94,.6,1);
+    transform: translateX(0%);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    min-width: 320px;
+}
+
+.form-control {
+    width: 100%;
+    border-radius: 4px;
+    padding-top: 12px;
+}
+
+.form-control * {
+    padding: 0 12px;
+}
+
+.form-control:after {
+    content: '';
+    display: block;
+    width: calc(100% - 8px);
+    margin: 12px 0 0 4px;
+    height: 1px;
+    background-color: #242424;
+}
+
+.form-control:focus-within {
+    background-color: #121212;
+}
+
+.form-control:focus-within:after {
+    background-color: transparent;
+}
+
+input {
+    width: calc(100% - 24px);
+    background-color: transparent;
+    outline: 0;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    caret-color: #fff;
+}
+
+label {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0 12px;
+    margin-bottom: 4px;
+    color: #dadada;
+}
+
+::placeholder {
+    font-size: 14px;
+    color: #cacaca;
 }
 
 ::selection, ::-moz-selection {
@@ -82,6 +171,44 @@ hr {
 .no-height {
     max-height: 0px;
 }
+
+.full-height {
+    min-height: 100vh;
+}
+
+
+/* Login & Register */
+.login {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-title {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 60px;
+}
+
+.login-form {
+    height: 100;
+}
+
+.login-signup {
+    position: absolute;
+    top: 6%;
+    right: 4%;
+}
+
+.valid-btn {
+    padding: 12px;
+    margin-top: 12px;
+}
+
+.recover {
+    margin-top: 40px;
+}
+
 
 /* Nav */
 .nav-section {
@@ -187,14 +314,10 @@ hr {
 }
 
 
-/* Login & Register */
-
-
 /* Home */
 .home {
     padding-top: 30px;
     min-height: 80vh;
-    display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -236,7 +359,6 @@ hr {
 .home-btns .btn {
     position: relative;
     height: 45%;
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -350,7 +472,6 @@ hr {
     flex: 1;
     margin-top: 16px;
     width: 80%;
-    color: #242424;
     font-weight: 500;
     display: flex;
     justify-content: center;
